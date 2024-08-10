@@ -1,0 +1,239 @@
+Project file structure:
+.\next-env.d.ts
+.\package.json
+.\tailwind.config.ts
+.\tsconfig.json
+.\app\globals.css
+.\app\layout.tsx
+.\app\page.tsx
+.\app\components\LinkButton.tsx
+.\app\components\Profile.tsx
+
+STARTFILE: .\next-env.d.ts
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/basic-features/typescript for more information.
+
+ENDFILE: .\next-env.d.ts
+
+STARTFILE: .\package.json
+{
+  "name": "linktree-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18",
+    "next": "14.2.5"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5"
+  }
+}
+
+ENDFILE: .\package.json
+
+STARTFILE: .\tailwind.config.ts
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+    },
+  },
+  plugins: [],
+};
+export default config;
+
+ENDFILE: .\tailwind.config.ts
+
+STARTFILE: .\tsconfig.json
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+
+ENDFILE: .\tsconfig.json
+
+STARTFILE: .\app\globals.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+ENDFILE: .\app\globals.css
+
+STARTFILE: .\app\layout.tsx
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "My Linktree",
+  description: "My Linktree",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>{children}</body>
+    </html>
+  );
+}
+
+ENDFILE: .\app\layout.tsx
+
+STARTFILE: .\app\page.tsx
+import Profile from "./components/Profile";
+import LinkButton from "./components/LinkButton";
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <Profile
+        name="Ridwan Mohamed"
+        avatar="/avatar.jpg"
+        bio="Web developer and coffee enthusiast"
+      />
+      <div className="w-full max-w-md">
+        <LinkButton href="https://github.com" text="GitHub" />
+        <LinkButton href="https://linkedin.com" text="LinkedIn" />
+        <LinkButton href="https://twitter.com" text="Twitter" />
+      </div>
+    </main>
+  );
+}
+
+ENDFILE: .\app\page.tsx
+
+STARTFILE: .\app\components\LinkButton.tsx
+import Link from 'next/link'
+
+interface LinkButtonProps {
+  href: string;
+  text: string;
+}
+
+const LinkButton = ({ href, text }: LinkButtonProps) => {
+  return (
+    <Link href={href} passHref>
+      <div className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-4 text-center cursor-pointer">
+        {text}
+      </div>
+    </Link>
+  );
+};
+
+export default LinkButton;
+ENDFILE: .\app\components\LinkButton.tsx
+
+STARTFILE: .\app\components\Profile.tsx
+import Image from 'next/image'
+
+interface ProfileProps {
+  name: string;
+  avatar: string;
+  bio?: string;
+}
+
+const Profile = ({ name, avatar, bio }: ProfileProps) => {
+  return (
+    <div className="text-center mb-8">
+      <Image
+        src={avatar}
+        alt={name}
+        width={150}
+        height={150}
+        className="rounded-full mx-auto mb-4"
+      />
+      <h1 className="text-2xl font-bold mb-2">{name}</h1>
+      {bio && <p className="text-gray-600">{bio}</p>}
+    </div>
+  );
+};
+
+export default Profile;
+ENDFILE: .\app\components\Profile.tsx
+
