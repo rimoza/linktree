@@ -12,7 +12,16 @@ export default function Home() {
           bio="Passionate Full Stack developer with 3 years of experience in creating beautiful, responsive, and user-friendly web applications. My mission is to build digital experiences that not only look great but also solve real-world problems."
         />
         <div className="space-y-4 animate-slide-up">
-          <LinkButton href="https://github.com/rimoza" text="GitHub" icon="github" />
+          <LinkButton
+            href="https://rimoza.vercel.app"
+            text="My Website"
+            icon="website"
+          />
+          <LinkButton
+            href="https://github.com/rimoza"
+            text="GitHub"
+            icon="github"
+          />
           <LinkButton
             href="https://www.linkedin.com/in/rimoza/"
             text="LinkedIn"

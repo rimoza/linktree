@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaInstagram, FaInternetExplorer, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 interface LinkButtonProps {
   href: string;
   text: string;
-  icon: "github" | "linkedin" | "twitter" | "instagram";
+  icon: "github" | "linkedin" | "twitter" | "instagram" | "website";
 }
 
 const iconMap = {
@@ -12,6 +12,7 @@ const iconMap = {
   linkedin: FaLinkedin,
   twitter: FaTwitter,
   instagram: FaInstagram,
+  website: FaInternetExplorer,
 };
 
 const LinkButton = ({ href, text, icon }: LinkButtonProps) => {
