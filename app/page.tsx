@@ -2,6 +2,10 @@ import Profile from "./components/Profile";
 import LinkButton from "./components/LinkButton";
 
 export default function Home() {
+  const startYear = 2021;
+  const currentYear = new Date().getFullYear();
+  const yearsOfExperience = currentYear - startYear;
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8">
       <div className="w-full max-w-lg glass-effect rounded-3xl p-8 shadow-xl animate-fade-in">
@@ -9,7 +13,7 @@ export default function Home() {
           name="Ridwan Mohamed"
           avatar="/avatar.jpg"
           title="Full Stack Developer"
-          bio="Passionate Full Stack developer with 3 years of experience in creating beautiful, responsive, and user-friendly web applications. My mission is to build digital experiences that not only look great but also solve real-world problems."
+          bio={`Passionate Full Stack developer with ${yearsOfExperience} years of experience in creating beautiful, responsive, and user-friendly web applications. My mission is to build digital experiences that not only look great but also solve real-world problems.`}
         />
         <div className="space-y-4 animate-slide-up">
           <LinkButton
